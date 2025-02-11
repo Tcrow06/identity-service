@@ -1,5 +1,14 @@
 package com.example.identity_service.exception;
 
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.experimental.FieldDefaults;
+
+@Setter
+@Getter
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class AppException extends RuntimeException{
 
     public AppException(ErrorCode errorCode) {
@@ -7,13 +16,7 @@ public class AppException extends RuntimeException{
         this.errorCode = errorCode;
     }
 
-    private ErrorCode errorCode;
+    ErrorCode errorCode;
 
-    public ErrorCode getErrorCode() {
-        return errorCode;
-    }
 
-    public void setErrorCode(ErrorCode errorCode) {
-        this.errorCode = errorCode;
-    }
 }

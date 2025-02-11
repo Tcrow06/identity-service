@@ -23,24 +23,30 @@ public class UserController {
     UserService userService;
 
     @PostMapping()
-    public ApiResponse<UserResponse> createUser(@RequestBody @Valid UserCreationRequest request){
+    ApiResponse<UserResponse> createUser(@RequestBody @Valid UserCreationRequest request){
         ApiResponse<UserResponse> apiResponse = new ApiResponse<>();
         apiResponse.setResult(userService.createRequest(request));
         return apiResponse;
     }
 
     @GetMapping
-    List<UserResponse> getUsers(){
-        return userService.getUsers();
+    ApiResponse<List<UserResponse>> getUsers(){
+        ApiResponse<List<UserResponse>> apiResponse = new ApiResponse<>();
+        apiResponse.setResult(userService.getUsers());
+        return apiResponse;
     }
     @GetMapping("/{userid}")
-    UserResponse getUser(@PathVariable("userid") String userid){
-        return userService.getUser(userid);
+    ApiResponse<UserResponse> getUser(@PathVariable("userid") String userid){
+        ApiResponse<UserResponse> apiResponse = new ApiResponse<>();
+        apiResponse.setResult(userService.getUser(userid));
+        return apiResponse;
     }
 
     @PutMapping("/{userid}")
-    UserResponse updateUser(@PathVariable("userid") String userId, @RequestBody UserUpdateRequest request){
-        return userService.updateUser(userId,request);
+    ApiResponse<UserResponse> updateUser(@PathVariable("userid") String userId, @RequestBody UserUpdateRequest request){
+        ApiResponse<UserResponse> apiResponse = new ApiResponse<>();
+        apiResponse.setResult(userService.updateUser(userId,request));
+        return apiResponse;
     }
 
     @DeleteMapping("/{userid}")
