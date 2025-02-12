@@ -16,6 +16,7 @@ public enum ErrorCode {
 
     INVALID_KEY(9998,"Invalid message key"),
     USER_NOT_EXISTED(1002,"User not existed"),
+    UNAUTHENTICATED(1006,"Unauthenticated")
     ;
 
     int code;
