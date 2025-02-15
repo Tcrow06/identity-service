@@ -24,8 +24,7 @@ public class User {
     String firstName;
     String lastName;
     LocalDate dob;
-    @ElementCollection(fetch = FetchType.EAGER) // Danh dau day la cac gia tri don gian
-    @CollectionTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"))// tao bang phu user_roles để lưu các giá trị roles, liên kết với bảng User thông qua user_id
-    @Column(name = "role")
-    Set<String> roles ;
+
+    @ManyToMany
+    Set<Role> roles ;
 }
