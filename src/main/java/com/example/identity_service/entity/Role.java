@@ -9,7 +9,7 @@ import lombok.experimental.FieldDefaults;
 import java.util.Set;
 
 @Getter
-@Data
+@Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor

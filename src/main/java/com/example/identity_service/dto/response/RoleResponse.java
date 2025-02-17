@@ -1,19 +1,17 @@
-package com.example.identity_service.entity;
+package com.example.identity_service.dto.response;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
-@Getter
-@Setter
+import java.util.Set;
+
+@Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-@Entity
-public class Permission {
-    @Id
+public class RoleResponse {
     String name;
     String description;
+    Set<PermissionResponse> permissions;
 }
