@@ -3,6 +3,7 @@ package com.example.identity_service.service;
 import com.example.identity_service.dto.request.AuthenticationRequest;
 import com.example.identity_service.dto.request.IntrospectRequest;
 import com.example.identity_service.dto.request.LogoutRequest;
+import com.example.identity_service.dto.request.RefreshRequest;
 import com.example.identity_service.dto.response.AuthenticationResponse;
 import com.example.identity_service.dto.response.IntrospectResponse;
 import com.example.identity_service.entity.InvalidatedToken;
@@ -140,6 +141,27 @@ public class AuthenticationService {
                .expiryTime(expiryTime)
                .build();
        invalidatedTokenRepository.save(invalidatedToken);
+
+   }
+
+   public AuthenticationResponse refreshToken(RefreshRequest request) throws ParseException, JOSEException {
+       var signedJWT = verifyToken(request.getToken());
+       var jti = signedJWT.getJWTClaimsSet().getJWTID();
+       var expiryTime = signedJWT.getJWTClaimsSet().getExpirationTime();
+       InvalidatedToken invalidatedToken = InvalidatedToken.builder()
+               .id(jti)
+               .expiryTime(expiryTime)
+               .build();
+       invalidatedTokenRepository.save(invalidatedToken);
+
+       var user = userRepository.findByUsername(signedJWT.getJWTClaimsSet().getSubject())
+               .orElseThrow(()-> new AppException(ErrorCode.USER_NOT_EXISTED));
+       var token = generateToken(user);
+       return AuthenticationResponse.builder()
+               .token(token)
+               .authenticated(true)
+               .build();
+
 
    }
 }
