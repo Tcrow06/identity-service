@@ -3,7 +3,7 @@ server:
   servlet:
     context-path: /identity_service
   tomcat:
-    connection-timeout: 3360
+    connection-timeout: 3360s
 spring:
   datasource:
     url: "jdbc:mysql://localhost:3300/identity_service"

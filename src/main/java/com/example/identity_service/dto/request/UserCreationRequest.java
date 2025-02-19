@@ -1,11 +1,14 @@
 package com.example.identity_service.dto.request;
 
-import com.example.identity_service.validator.DobConstraint;
+import java.time.LocalDate;
+
 import jakarta.validation.constraints.Size;
+
+import com.example.identity_service.validator.DobConstraint;
+
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
-import java.time.LocalDate;
 @Data
 @Builder
 @NoArgsConstructor
@@ -14,14 +17,13 @@ import java.time.LocalDate;
 public class UserCreationRequest {
     @Size(min = 4, message = "INVALID_USERNAME")
     String username;
+
     @Size(min = 6, message = "INVALID_PASSWORD")
     String password;
+
     String firstName;
     String lastName;
 
     @DobConstraint(min = 16, message = "INVALID_DOB")
     LocalDate dob;
-
-
-
 }
