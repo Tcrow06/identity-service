@@ -1,6 +1,6 @@
 package com.example.identity_service.enums;
 
-public enum Role {
+public enum EnumRole {
     ADMIN,
     USER
 }
